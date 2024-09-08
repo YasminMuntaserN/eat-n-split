@@ -2,11 +2,21 @@ import { useState } from "react";
 import { Button } from "./Button.js";
 
 
-export function FormSplitBill({selectedFriend ,onSetExpense }){
+export function FormSplitBill({selectedFriend ,onSetExpense ,onDeterminatWhoOwes }){
   const [bill, setBill]=useState(0);
   const [userExpense, setUserExpense]=useState(0);
   const FriendExpense =bill -userExpense  ;
-  const []
+
+  function handleWhoOwens(e) {
+    if (e.target.value === "user") {
+      onSetExpense(userExpense);
+      onDeterminatWhoOwes("user");
+    } else {
+      onSetExpense(FriendExpense);
+      onDeterminatWhoOwes(selectedFriend.name);
+    }
+  }
+
   
   return (
     <form className="form-split-bill" >
@@ -26,9 +36,9 @@ export function FormSplitBill({selectedFriend ,onSetExpense }){
     <label>👫 {selectedFriend.name}'s expense</label>
     <input type="text"
       disabled value={FriendExpense} />
+      
     <label>🤑 Who is paying the bill</label>
-    <select onChange={(e)=>onSetExpense(
-        e.target.value ==="user"? userExpense : FriendExpense )} >
+    <select onChange={handleWhoOwens} >
       <option value="user">You</option>
       <option value="friend">{selectedFriend.name}</option>
     </select>

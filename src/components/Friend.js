@@ -1,5 +1,6 @@
 export function Friend({friend ,onSelectedFriend ,whoOwes ,expense}){
   function handleWhoOwens(){
+    console.log(`whoOwes from frined: ${whoOwes}`); 
     return( whoOwes===friend.name ?
       `You and ${friend.name} are even `: whoOwes===friend.name ?
       ` ${friend.name } owes you ${expense} $`:

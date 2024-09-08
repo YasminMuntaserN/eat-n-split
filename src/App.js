@@ -27,10 +27,10 @@ const initialFriends = [
 export default function App() {
   const [selectedFriend, select]=useState(initialFriends[0]);
   const [expense, setExpense]=useState(0);
-  const [whoOwes, setwhoOwes]=useState(0);
+  const [whoOwes, setwhoOwes]=useState("");
 
     console.log(expense);
-    console.log(whoOwes);
+    console.log(`whoOwes from App : ${whoOwes}`);
 
   return (
     <div className="app">
@@ -38,12 +38,13 @@ export default function App() {
           <FriendsList
               frindList={initialFriends} 
               onSelectedFriend ={select}
-              expense={expense}/>
+              expense={expense}
+              whoOwes={whoOwes}/>
 
           <FormSplitBill
               selectedFriend={selectedFriend} 
               onSetExpense={setExpense}
-              onDetermineWhoOwes={setwhoOwes}
+              onDeterminatWhoOwes={setwhoOwes}
           />
     </div>
   );
