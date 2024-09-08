@@ -6,7 +6,6 @@ export function FriendsList({frindList ,onSelectedFriend ,expense}){
       {frindList.map((friend) => (
             <Friend friend={friend}
               onSelectedFriend={onSelectedFriend}
-              key={friend.id}
               expense={expense}/>
       ))}
       </ul>

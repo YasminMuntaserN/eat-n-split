@@ -6,7 +6,7 @@ export function FormSplitBill({selectedFriend ,onSetExpense }){
   const [bill, setBill]=useState(0);
   const [userExpense, setUserExpense]=useState(0);
   const FriendExpense =bill -userExpense  ;
-
+  const []
   
   return (
     <form className="form-split-bill" >
