@@ -1,3 +1,8 @@
+import {FriendsList} from "./components/FriendsList.js";
+import {FormSplitBill} from "./components/FormSplitBill.js";
+import { useState } from "react";
+
+
 const initialFriends = [
   {
     id: 118836,
@@ -19,12 +24,24 @@ const initialFriends = [
   },
 ];
 
-function App() {
+export default function App() {
+  const [selectedFriend, select]=useState(initialFriends[0]);
+  const [expense, setExpense]=useState(0);
+    console.log(expense);
   return (
-    <div className="App">
+    <div className="app">
 
+          <FriendsList
+              frindList={initialFriends} 
+              onSelectedFriend ={select}
+              expense={expense}/>
+
+          <FormSplitBill
+              selectedFriend={selectedFriend} 
+              onSetExpense={setExpense}
+          />
     </div>
   );
 }
 
-export default App;
+
