@@ -25,27 +25,38 @@ const initialFriends = [
 ];
 
 export default function App() {
-  const [selectedFriend, select]=useState(initialFriends[0]);
-  const [expense, setExpense]=useState(0);
-  const [whoOwes, setwhoOwes]=useState("");
+  const [selectedFriend, setSelectedFriend] = useState(null); // useState to handle the selected friend
+  const [expense, setExpense] = useState(0); // State to track expense
+  const [whoOwes, setWhoOwes] = useState(""); // State to track who owes
+  const [clickSplitBillButton, setClickSplitBillButton] = useState(false); // State to track split bill button click
+  const [clickSelectButton, setClickSelectButton] = useState(false); // State to track select button click
 
-    console.log(expense);
-    console.log(`whoOwes from App : ${whoOwes}`);
+  console.log(`Expense from App: ${expense}`);
+  console.log(`whoOwes from App: ${whoOwes}`);
+  console.log(`selectedFriend: ${selectedFriend?.name}`);
+  console.log(`clickSplitBillButton: ${clickSplitBillButton}`);
+
 
   return (
     <div className="app">
+      <FriendsList
+        friendList={initialFriends}
+        onSelectedFriend={setSelectedFriend} // Pass the function to change selected friend
+        selectedFriend={selectedFriend}
+        expense={expense} // Passing the current expense state
+        whoOwes={whoOwes} // Passing the current "who owes" state
+        clickSplitBillButton={clickSplitBillButton}
+        onclickSelectButton={setClickSelectButton}
+      />
 
-          <FriendsList
-              frindList={initialFriends} 
-              onSelectedFriend ={select}
-              expense={expense}
-              whoOwes={whoOwes}/>
-
-          <FormSplitBill
-              selectedFriend={selectedFriend} 
-              onSetExpense={setExpense}
-              onDeterminatWhoOwes={setwhoOwes}
-          />
+      {clickSelectButton && (
+        <FormSplitBill
+          selectedFriend={selectedFriend}
+          onSetExpense={setExpense}
+          onDetermineWhoOwes={setWhoOwes}
+          onclickSplitBillButton={setClickSplitBillButton}
+        />
+      )}
     </div>
   );
 }

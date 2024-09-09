@@ -1,18 +1,29 @@
-import {Friend} from "./Friend.js";
-export function FriendsList({frindList ,onSelectedFriend,whoOwes ,expense }){
-  console.log(`whoOwes from FriendsList: ${whoOwes}`); 
-    return (
+import React from 'react';
+import { Friend } from './Friend';
+
+export function FriendsList({
+  friendList,
+  onSelectedFriend,
+  whoOwes,
+  expense,
+  clickSplitBillButton,
+  onclickSelectButton
+}) {
+  return (
     <div className="sidebar">
       <ul>
-      {frindList.map((friend) => (
-            <Friend friend={friend}
-              onSelectedFriend={onSelectedFriend}
-              whoOwes={whoOwes}
-              expense={expense}
-              key={friend.id}
-              />
-      ))}
+        {friendList.map((friend) => (
+          <Friend
+            friend={friend}
+            onSelectedFriend={onSelectedFriend}
+            whoOwes={whoOwes}
+            expense={expense}
+            key={friend.id}
+            clickSplitBillButton={clickSplitBillButton}
+            onclickSelectButton={onclickSelectButton}
+          />
+        ))}
       </ul>
     </div>
-    );
+  );
 }
