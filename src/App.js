@@ -39,6 +39,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <div className="sidebar">
       <FriendsList
         friendList={initialFriends}
         onSelectedFriend={setSelectedFriend} // Pass the function to change selected friend
@@ -49,6 +50,7 @@ export default function App() {
         onclickSelectButton={setClickSelectButton}
       />
 
+
       {clickSelectButton && (
         <FormSplitBill
           selectedFriend={selectedFriend}
@@ -57,6 +59,7 @@ export default function App() {
           onclickSplitBillButton={setClickSplitBillButton}
         />
       )}
+      </div>
     </div>
   );
 }
