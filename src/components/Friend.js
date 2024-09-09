@@ -3,10 +3,12 @@ import { Button } from './Button';
 
 export function Friend({
   friend,
-  onSelectedFriend,
+  selectedFriend,
   clickSplitBillButton,
   onSelection
 }) {
+  const isSelected =selectedFriend?.id ===friend.id;
+
   function handleWhoOwesText() {
     if (clickSplitBillButton) {
       if (friend.balance < 0) {
@@ -21,11 +23,11 @@ export function Friend({
   const { text, className } = handleWhoOwesText() || {};
 
   return (
-    <li>
+    <li className ={isSelected? "selected":""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       <p className={className}>{text}</p>
-      <Button action={() => onSelection(friend)}>Select</Button>
+      <Button action={() => onSelection(friend)}>{isSelected? "Close":"Select"}</Button>
     </li>
   );
 }

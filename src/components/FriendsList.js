@@ -3,7 +3,7 @@ import { Friend } from './Friend';
 
 export function FriendsList({
   friendList,
-  onSelectedFriend,
+  selectedFriend,
   whoOwes,
   expense,
   clickSplitBillButton,
@@ -15,7 +15,7 @@ export function FriendsList({
         {friendList.map((friend) => (
           <Friend
             friend={friend}
-            onSelectedFriend={onSelectedFriend}
+            selectedFriend={selectedFriend}
             whoOwes={whoOwes}
             expense={expense}
             key={friend.id}
