@@ -49,6 +49,7 @@ export default function App() {
         clickSplitBillButton={clickSplitBillButton}
         onclickSelectButton={setClickSelectButton}
       />
+      </div>
 
 
       {clickSelectButton && (
@@ -59,7 +60,6 @@ export default function App() {
           onclickSplitBillButton={setClickSplitBillButton}
         />
       )}
-      </div>
     </div>
   );
 }

@@ -4,18 +4,15 @@ import { Button } from './Button';
 export function Friend({
   friend,
   onSelectedFriend,
-  whoOwes,
-  expense,
   clickSplitBillButton,
   onclickSelectButton
 }) {
   function handleWhoOwesText() {
-    console.log(`whoOwes: ${whoOwes}` );
     if (clickSplitBillButton) {
-      if (whoOwes === "user") {
-        return { text: `You owe ${friend.name} ${expense} $`, className: "red" };
-      } else if (whoOwes === friend.name) {
-        return { text: `${friend.name} owes you ${expense} $`, className: "green" };
+      if (friend.balance < 0) {
+        return { text: `You owe ${friend.name} ${Math.abs(friend.balance)} $`, className: "red" };
+      } else  {
+        return { text: `${friend.name} owes you ${Math.abs(friend.balance)} $`, className: "green" };
       }
     }
     return { text: `You and ${friend.name} are even`, className: "" };
