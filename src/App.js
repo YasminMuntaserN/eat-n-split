@@ -32,12 +32,15 @@ export default function App() {
   const [expense, setExpense] = useState(0); // State to track expense
   const [whoOwes, setWhoOwes] = useState(""); // State to track who owes
   const [clickSplitBillButton, setClickSplitBillButton] = useState(false); // State to track split bill button click
-  const [clickSelectButton, setClickSelectButton] = useState(false); // State to track select button click
   const[showAddFriend ,setShowAddFriend]= useState(false); // State to trackAdd friend button
 
   function handleAddFriend(newFriend){
     setFriends(friends=>[...friends,newFriend]);
     setShowAddFriend(false);
+  }
+
+  function handleSelection(friend){
+    setSelectedFriend(friend);
   }
 
   return (
@@ -50,14 +53,14 @@ export default function App() {
         expense={expense} // Passing the current expense state
         whoOwes={whoOwes} // Passing the current "who owes" state
         clickSplitBillButton={clickSplitBillButton}
-        onclickSelectButton={setClickSelectButton}
+        onSelection={handleSelection}
       />
       {showAddFriend && <FormAddFrined OnAddFriend={handleAddFriend}/>}
       <Button action={()=>setShowAddFriend(!showAddFriend)}>{showAddFriend?"close" :"Add Friend"}</Button>
       </div>
 
 
-      {clickSelectButton && (
+      {selectedFriend && (
         <FormSplitBill
           selectedFriend={selectedFriend}
           onSetExpense={setExpense}
