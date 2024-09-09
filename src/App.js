@@ -27,23 +27,23 @@ const initialFriends = [
 ];
 
 export default function App() {
+  const [friends,setFriends]=useState(initialFriends);
   const [selectedFriend, setSelectedFriend] = useState(null); // useState to handle the selected friend
   const [expense, setExpense] = useState(0); // State to track expense
   const [whoOwes, setWhoOwes] = useState(""); // State to track who owes
   const [clickSplitBillButton, setClickSplitBillButton] = useState(false); // State to track split bill button click
   const [clickSelectButton, setClickSelectButton] = useState(false); // State to track select button click
+  const[showAddFriend ,setShowAddFriend]= useState(false); // State to trackAdd friend button
 
-  console.log(`Expense from App: ${expense}`);
-  console.log(`whoOwes from App: ${whoOwes}`);
-  console.log(`selectedFriend: ${selectedFriend?.name}`);
-  console.log(`clickSplitBillButton: ${clickSplitBillButton}`);
-
+  function handleAddFriend(newFriend){
+    setFriends(friends=>[...friends,newFriend]);
+  }
 
   return (
     <div className="app">
       <div className="sidebar">
       <FriendsList
-        friendList={initialFriends}
+        friendList={friends}
         onSelectedFriend={setSelectedFriend} // Pass the function to change selected friend
         selectedFriend={selectedFriend}
         expense={expense} // Passing the current expense state
@@ -51,8 +51,8 @@ export default function App() {
         clickSplitBillButton={clickSplitBillButton}
         onclickSelectButton={setClickSelectButton}
       />
-      <FormAddFrined/>
-      <Button>Add Friend</Button>
+      {showAddFriend && <FormAddFrined OnAddFriend={handleAddFriend}/>}
+      <Button action={()=>setShowAddFriend(!showAddFriend)}>{showAddFriend?"close" :"Add Friend"}</Button>
       </div>
 
 
