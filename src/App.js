@@ -1,5 +1,7 @@
 import {FriendsList} from "./components/FriendsList.js";
 import {FormSplitBill} from "./components/FormSplitBill.js";
+import{FormAddFrined}from "./components/FormAddFriend.js";
+import{Button}from "./components/Button.js";
 import { useState } from "react";
 
 
@@ -49,6 +51,8 @@ export default function App() {
         clickSplitBillButton={clickSplitBillButton}
         onclickSelectButton={setClickSelectButton}
       />
+      <FormAddFrined/>
+      <Button>Add Friend</Button>
       </div>
 
 
