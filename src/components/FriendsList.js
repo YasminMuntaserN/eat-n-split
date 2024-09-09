@@ -7,7 +7,7 @@ export function FriendsList({
   whoOwes,
   expense,
   clickSplitBillButton,
-  onclickSelectButton
+  onSelection
 }) {
   return (
     <div className="sidebar">
@@ -20,7 +20,7 @@ export function FriendsList({
             expense={expense}
             key={friend.id}
             clickSplitBillButton={clickSplitBillButton}
-            onclickSelectButton={onclickSelectButton}
+            onSelection={onSelection}
           />
         ))}
       </ul>

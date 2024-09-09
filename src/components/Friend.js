@@ -5,7 +5,7 @@ export function Friend({
   friend,
   onSelectedFriend,
   clickSplitBillButton,
-  onclickSelectButton
+  onSelection
 }) {
   function handleWhoOwesText() {
     if (clickSplitBillButton) {
@@ -20,17 +20,12 @@ export function Friend({
 
   const { text, className } = handleWhoOwesText() || {};
 
-  function handleSelectButton() {
-    onclickSelectButton(true);
-    onSelectedFriend(friend);
-  }
-
   return (
     <li>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       <p className={className}>{text}</p>
-      <Button action={() => handleSelectButton()}>Select</Button>
+      <Button action={() => onSelection(friend)}>Select</Button>
     </li>
   );
 }
