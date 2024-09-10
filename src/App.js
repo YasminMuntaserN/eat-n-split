@@ -27,12 +27,10 @@ const initialFriends = [
 ];
 
 export default function App() {
+
   const [friends,setFriends]=useState(initialFriends);
-  const [selectedFriend, setSelectedFriend] = useState(null); // useState to handle the selected friend
-  const [expense, setExpense] = useState(0); // State to track expense
-  const [whoOwes, setWhoOwes] = useState(""); // State to track who owes
-  const [clickSplitBillButton, setClickSplitBillButton] = useState(false); // State to track split bill button click
-  const[showAddFriend ,setShowAddFriend]= useState(false); // State to trackAdd friend button
+  const [selectedFriend, setSelectedFriend] = useState(null);
+  const[showAddFriend ,setShowAddFriend]= useState(false); 
 
   function handleAddFriend(newFriend){
     setFriends(friends=>[...friends,newFriend]);
@@ -44,6 +42,16 @@ export default function App() {
     setShowAddFriend(false);
   }
 
+  function handleSplitBill(value){
+    setFriends((friends) =>
+        friends.map((friend) =>
+            friend.id === selectedFriend.id ?
+              {...friends , balance:friends.balance + value } : friend
+            )
+        );
+    setSelectedFriend(null);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -51,9 +59,6 @@ export default function App() {
         friendList={friends}
         onSelectedFriend={setSelectedFriend} // Pass the function to change selected friend
         selectedFriend={selectedFriend}
-        expense={expense} // Passing the current expense state
-        whoOwes={whoOwes} // Passing the current "who owes" state
-        clickSplitBillButton={clickSplitBillButton}
         onSelection={handleSelection}
       />
       {showAddFriend && <FormAddFrined OnAddFriend={handleAddFriend}/>}
@@ -64,9 +69,7 @@ export default function App() {
       {selectedFriend && (
         <FormSplitBill
           selectedFriend={selectedFriend}
-          onSetExpense={setExpense}
-          onDetermineWhoOwes={setWhoOwes}
-          onclickSplitBillButton={setClickSplitBillButton}
+          onSplitBill={handleSplitBill}
         />
       )}
     </div>

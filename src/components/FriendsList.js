@@ -16,8 +16,6 @@ export function FriendsList({
           <Friend
             friend={friend}
             selectedFriend={selectedFriend}
-            whoOwes={whoOwes}
-            expense={expense}
             key={friend.id}
             clickSplitBillButton={clickSplitBillButton}
             onSelection={onSelection}

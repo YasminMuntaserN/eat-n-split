@@ -2,24 +2,18 @@ import { useState } from "react";
 import { Button } from "./Button.js";
 
 
-export function FormSplitBill({selectedFriend ,onSetExpense ,onDetermineWhoOwes,onclickSplitBillButton }){
+export function FormSplitBill({selectedFriend ,onSplitBill}){
   const [bill, setBill] = useState(0); // State to track the bill amount
-  const [userExpense, setUserExpense] = useState(0); // State to track user expense
-  const friendExpense = bill - userExpense; // Calculate the friend's expense
+  const [userPaying, setUserPaying] = useState(0); // State to track user Paying
+  const friendPaying =bill?bill - userPaying :""; // Calculate the friend's Paying
+  const [whoIsPaying, setWhoIsPaying] = useState("user");
 
-  // Function to handle the selection of who pays
-  function handleWhoOwes(e) {
-    if (e.target.value === "user") {
-      onSetExpense(userExpense); // Set the expense for the user
-      onDetermineWhoOwes("user"); // Mark that the user is paying
-    } else {
-      onSetExpense(friendExpense); // Set the friend's expense
-      onDetermineWhoOwes(selectedFriend.name); // Mark that the friend is paying
-    }
-  }
-
-  function handleSubmit(e) {
+  function handleSubmit(e){
     e.preventDefault();
+
+    if(!bill || !userPaying) return;
+
+    onSplitBill(whoIsPaying ==="user" ?friendPaying :-userPaying);
   }
 
   return (
@@ -36,19 +30,26 @@ export function FormSplitBill({selectedFriend ,onSetExpense ,onDetermineWhoOwes,
       <label>🧍‍♀️ Your expense</label>
       <input
         type="text"
-        onChange={(e) => setUserExpense(Number(e.target.value))} // Update the user expense
+        value={userPaying}
+        onChange={(e) =>
+          setUserPaying(
+            Number(e.target.value) > bill ? userPaying  : Number(e.target.value)
+          )
+        }
       />
-
       <label>👫 {selectedFriend.name}'s expense</label>
-      <input type="text" disabled value={friendExpense} /> {/* Friend's expense is calculated */}
+      <input type="text" disabled value={friendPaying} />
 
       <label>🤑 Who is paying the bill</label>
-      <select onChange={handleWhoOwes}>
+      <select
+        value={whoIsPaying}
+        onChange={(e) => setWhoIsPaying(e.target.value)}
+      >
         <option value="user">You</option>
         <option value="friend">{selectedFriend.name}</option>
       </select>
 
-          <Button action={()=> onclickSplitBillButton(true)}>Split bill</Button>
+      <Button>Split bill</Button>
     </form>
   );
 }
